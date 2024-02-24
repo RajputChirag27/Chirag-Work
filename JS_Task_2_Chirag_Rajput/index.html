@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS Task 2</title>
+  <!-- Styles  -->
+  <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+
+  <!-- Main Starts Here  -->
+  <main class="d-flex flex-column justify-content-center py-5">
+    <!-- Modal  -->
+    <!-- Button trigger modal -->
+    <div class="container-fluid d-flex justify-content-center align-items-center">
+      <button type="button" class="btn btn-success fs-3 px-5 py-3" data-bs-toggle="modal"
+        data-bs-target="#exampleModal">
+        Add Student
+      </button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog ">
+        <div class="modal-content ">
+          <div class="modal-header ">
+            <h1 class="modal-title fs-1 text-white" id="exampleModalLabel">Student Details</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="myForm" class="fs-1 text-white">
+              <div class="form-group">
+                <label for="firstName">First Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="firstName" name="firstName" required>
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" class="form-control" id="lastName" name="lastName">
+              </div>
+              <div class="form-group">
+                <label for="dob">Date of Birth (minimum 18) <span class="text-danger">*</span></label>
+                <input type="date" class="form-control text-uppercase" id="dob" name="dob" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" id="email" name="email" required>
+              </div>
+              <div class="form-group">
+                <label for="address">Address (multiline)</label>
+                <textarea class="form-control" id="address" name="address" rows="3"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="startYear">Start Year <span class="text-danger">*</span></label>
+                <input type="month" class="form-control" id="startYear" name="startYear" value="2024-02" required>
+              </div>
+              <div class="form-group">
+                <label for="graduationYear">Graduation Year <span class="text-danger">*</span></label>
+                <input type="month" class="form-control" id="graduationYear" name="graduationYear" value="2024-02"
+                  required>
+              </div>
+              <button type="submit" class="btn btn-success my-5 px-5 py-3 fs-3">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Ends  -->
+
+
+    <!-- Output Table  -->
+    <h2 class="text-center text-white py-5">Collected Data will shown below</h2>
+
+    <div class="row justify-content-center">
+      <div class="col-auto">
+        <div class="table-responsive mt-5 w-100 d-flex flex-column justify-content-center align-items-center">
+          <table class="table table-dark table-striped w-100 text-center table-bordered fs-1 hidden" id="collTable">
+            <thead>
+              <tr class="fs-1">
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Date of Birth</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Start Year</th>
+                <th>Graduation Year</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="data-table-body" class="fs-1">
+              <!-- Data rows will be dynamically added here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!--  Scripts  -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="./assets/bootstrap/js/bootstrap.bundle.js"></script>
+  <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
