@@ -35,8 +35,10 @@
           <div class="modal-body">
             <form id="myForm" class="fs-1 text-white">
               <div class="form-group">
+                <span class="alert-message fs-3" id="formError"></span>
                 <label for="firstName">First Name <span class="text-danger">*</span></label>
-                <input type="text" class="form-control" id="firstName" name="firstName" required>
+                <input type="text" class="form-control" id="firstName" name="firstName">
+                <span class="alert-message" id="firstNameError"></span>
               </div>
               <div class="form-group">
                 <label for="lastName">Last Name</label>
@@ -45,10 +47,12 @@
               <div class="form-group">
                 <label for="dob">Date of Birth (minimum 18) <span class="text-danger">*</span></label>
                 <input type="date" class="form-control text-uppercase" id="dob" name="dob" required>
+                <span class="alert-message" id="dobError"></span>
               </div>
               <div class="form-group">
                 <label for="email">Email</label>
                 <input type="text" class="form-control" id="email" name="email" required>
+                <span class="alert-message" id="emailError"></span>
               </div>
               <div class="form-group">
                 <label for="address">Address (multiline)</label>
@@ -62,7 +66,95 @@
                 <label for="graduationYear">Graduation Year <span class="text-danger">*</span></label>
                 <input type="month" class="form-control" id="graduationYear" name="graduationYear" value="2024-02"
                   required>
+                  <span class="alert-message" id="graduationYearError"></span>
               </div>
+              <div class="container-fluid d-flex justify-content-between pt-5">
+                <h1 class="text-white fs-1">Education</h1>
+                <button class="btn-info btn mb-3" type="button" onclick="function1()">+</button>
+            </div>  
+              <div class="table-responsive">
+              <table class="table table-responsive table-striped table-hover text-center text-white mb-0"
+                id="table1">
+                <thead>
+                  <tr class="">
+                    <!-- <th scope="col">Team Member</th> -->
+                    <th scope="col">Degree/Board</th>
+                    <th scope="col">School/College</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">Passout Year</th>
+                    <th scope="col">Percentage</th>
+                    <th scope="col">Backlog</th>
+                    <th scope="col">Delete</th>
+                  </tr>
+                </thead>
+                <tbody class="">
+                  <tr>
+                    <td>
+                      <input type="text" name="Degree" class="form-control" placeholder="Degree" aria-label="Degree">
+                    </td>
+                    <td>
+                      <input type="text" name="School" class="form-control" aria-label="School">
+                    </td>
+
+                    <td>
+                      <input type="month" class="form-control" name="Start" aria-label="Start" id="Start"
+                        value="2024-02">
+                    </td>
+
+                    <td>
+                      <input type="month" class="form-control" name="Passout" aria-label="Passout" id="Passout"
+                        value="2024-02">
+                    </td>
+
+
+                    <td>
+                      <input type="number" name="Percentage" class="form-control" placeholder="Dont use % sign"
+                        aria-label="Percentage" min="0" max="100">
+                    </td>
+                    <td>
+                      <input type="number" name="Backlog" class="form-control" placeholder="If Any" min="0" max="10"
+                        aria-label="Backlog">
+                    </td>
+                    <td> <button class="btn-danger btn" disabled>-</button></td>
+
+
+                  </tr>
+                  <tr>
+                    <td>
+                      <input type="text" name="Degree" class="form-control" placeholder="Degree" aria-label="Degree">
+                    </td>
+                    <td>
+                      <input type="text" name="Degree" class="form-control" aria-label="Degree">
+                    </td>
+
+                    <td>
+                      <input type="month" class="form-control" name="Start" aria-label="Start" id="Start"
+                        value="2024-02">
+                    </td>
+
+                    <td>
+                      <input type="month" class="form-control" name="Passout" aria-label="Passout" id="Passout"
+                        value="2024-02">
+                    </td>
+
+
+                    <td>
+                      <input type="number" name="Percentage" class="form-control" placeholder="Dont use % sign"
+                        aria-label="Percentage" min="0" max="100">
+                    </td>
+                    <td>
+                      <input type="number" name="Backlog" class="form-control" placeholder="If Any" min="0" max="10"
+                        aria-label="Backlog">
+                    </td>
+                    <td> <button class="btn-danger btn" disabled>-</button></td>
+                  </tr>
+
+                </tbody>
+
+
+
+              </table>
+            </div>
               <button type="submit" class="btn btn-success my-5 px-5 py-3 fs-3">Submit</button>
             </form>
           </div>

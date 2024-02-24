@@ -2,58 +2,91 @@ document.getElementById('myForm').addEventListener('submit', function (event) {
     event.preventDefault();
 
 
-    var startYear = document.getElementById('startYear').value;
-    var graduationYear = document.getElementById('graduationYear').value;
-    var dob = new Date(document.getElementById('dob').value);
+    var formData = new FormData(this); // Get form data
+    // var data = {};
+    // getting entries in a variable from form data object 
+    var formDataObject = Object.fromEntries(formData);
+
+    const arr = JSON.stringify(formDataObject);
+    var fDO = JSON.parse(arr);
+
+    console.log(arr);
+    console.log(fDO.email);
+
+    console.log(Object.fromEntries(formData));
+
+    // formData.forEach(function (value, key) {
+    //     data[key] = value;
+    // });
+
+
+    var firstName = fDO.firstName;
+    var startYear = fDO.startYear;
+    var graduationYear = fDO.graduationYear;
+    var dob = new Date(fDO.dob);
     var today = new Date();
     var age = today.getFullYear() - dob.getFullYear();
     var m = today.getMonth() - dob.getMonth();
-    var email = document.getElementById('email').value;
+    var email = fDO.email;
 
     // Form Handling 
 
-    var formData = new FormData(this); // Get form data
-    var data = {};
+    // First Name Requirec
 
-
-    formData.forEach(function (value, key) {
-        data[key] = value;
-    });
-
-
-
-
-    // Email Validation
-
-    if (validateEmail(email)) {
-        console.log("Valid email");
+    if(firstName == ""){
+        document.getElementById('firstNameError').textContent = "Please Enter your First Name";
     } else {
-        alert("Invalid email");
-        event.preventDefault();
+        document.getElementById('firstNameError').textContent = "";
     }
 
 
+    // Email Validation
+    var emailValid = validateEmail(email);
+    if (!emailValid) {
+        document.getElementById('emailError').textContent = "Invalid email";
+    } else {
+        document.getElementById('emailError').textContent = "";
+    }
+
 
     // Age Validation
+    var ageValid = true;
     if (m < 0 || (m == 0 && today.getDate() < dob.getDate())) {
         age--;
     }
 
     if (age < 18) {
-        alert("You must be atleast 18 years old");
+        document.getElementById('dobError').textContent = "You must be at least 18 years old";
+        ageValid = false;
         event.preventDefault();
+    } else {
+        document.getElementById('dobError').textContent = "";
     }
+    
 
     // Graduation Year Validation
+    var graduationYearValid = true;
     if (graduationYear <= startYear) {
-        alert("Graduation year must be greater than start year.");
+        document.getElementById('graduationYearError').textContent = "Graduation year must be greater than start year";
+        graduationYearValid = false;
         event.preventDefault();
     }
+    else {
+        document.getElementById('graduationYearError').textContent = "";
+    }
 
-    addDatatoTable(data);
-    $('#exampleModal').modal('hide'); // Hide modal
+    if (!emailValid || !ageValid || !graduationYearValid) {
+        // If data is not valid, display alert or perform other actions
+        document.getElementById('formError').textContent = "Please Fill the Form Correctly";    
+        return;
+    }
+    else {
+        document.getElementById('formError').textContent = "";
+        addDatatoTable(fDO);
+        $('#exampleModal').modal('hide'); // Hide modal
 
-    this.reset(); // Reset form
+        this.reset(); // Reset form
+    }
 });
 
 
@@ -65,25 +98,27 @@ function validateEmail(email) {
     return emailRegex.test(email);
 }
 
-function addDatatoTable(data) {
+function addDatatoTable(fDO) {
     var tableBody = document.getElementById('data-table-body');
     var newRow = document.createElement('tr');
     var tableShow = document.getElementById("collTable").style.display = "block";
     newRow.innerHTML = `
-            <td>${data.firstName}</td>
-            <td>${data.lastName}</td>
-            <td>${data.dob}</td>
-            <td>${data.email}</td>
-            <td>${data.address}</td>
-            <td>${data.startYear}</td>
-            <td>${data.graduationYear}</td>
+            <td>${fDO.firstName}</td>
+            <td>${fDO.lastName}</td>
+            <td>${fDO.dob}</td>
+            <td>${fDO.email}</td>
+            <td>${fDO.address}</td>
+            <td>${fDO.startYear}</td>
+            <td>${fDO.graduationYear}</td>
             <td>
-                <button type="button" class="btn btn-success btn-sm" onclick="editEntry(this)">Edit</button>
-                <button type="button" class="btn btn-danger btn-sm" onclick="deleteEntry(this)">Delete</button>
+                <button type="button" class="btn btn-success btn-sm mb-3" onclick="editEntry(this)">Edit</button>
+                <button type="button" class="btn btn-danger btn-sm mb-3" onclick="deleteEntry(this)">Delete</button>
             </td>
         `;
     tableBody.appendChild(newRow);
 }
+
+// Delete Function
 
 function deleteEntry(button) {
     var row = button.closest('tr');
@@ -96,6 +131,10 @@ function deleteEntry(button) {
         table.parentNode.parentNode.remove();
     }
 }
+
+
+
+
 
 // Edit Function 
 
@@ -127,4 +166,41 @@ function editEntry(button) {
         event.preventDefault();
         row.remove();
     });
+}
+
+
+
+
+
+// Logic for adding more rows to a table .......
+
+function function1() {
+    var table1 = document.getElementById("table1");
+    var row = table1.insertRow(-1);
+
+
+    // Inserting Data to the Cells
+    var degreeCell = row.insertCell(0);
+    var collegeCell = row.insertCell(1);
+    var startCell = row.insertCell(2);
+    var passoutCell = row.insertCell(3);
+    var percentageCell = row.insertCell(4)
+    var backlogCell = row.insertCell(5)
+    var actionCell = row.insertCell(6);
+
+    degreeCell.innerHTML = `<input type="text" name="Degree" class="form-control"
+        placeholder="Degree" aria-label="Degree" >`
+    collegeCell.innerHTML = ` <input type="text" name="School" class="form-control"
+        aria-label="School" >`;
+    startCell.innerHTML = `<input type="month" class="form-control" name="Start" aria-label="Start"
+        id="Start" value="2024-02" >`;
+    passoutCell.innerHTML = ` <input type="month" class="form-control" name="Passout"
+        aria-label="Passout" id="Passout" value="2024-02" >`;
+    percentageCell.innerHTML = `<input type="number" name="Percentage" class="form-control"
+        placeholder="Dont use % sign" aria-label="Percentage" min="0"
+        max="100" >`;
+    backlogCell.innerHTML = `<input type="number" name="Backlog" class="form-control"
+        placeholder="If Any" min="0" max="10" aria-label="Backlog" >`;
+    actionCell.innerHTML = '<a href="#" class="btn btn-danger" onclick="deleteEntry(this)">-</a>';
+    return false;
 }

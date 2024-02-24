@@ -21,6 +21,7 @@ td {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 0.8rem;
+    font-size: 1.5rem !important;
 }
 
 th {
@@ -73,4 +74,11 @@ body {
 .modal-content {
     background: rgb(95, 23, 230);
     background: radial-gradient(circle, rgba(95, 23, 230, 1) 0%, rgba(158, 0, 255, 1) 100%);
+}
+
+.alert-message {
+    color: red;
+    font-size: 12px;
+    display: block;
+    margin-top: 4px;
 }
